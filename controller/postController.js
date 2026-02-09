@@ -8,15 +8,8 @@ function index(req, res){
             post=>post.posted.includes(req.query.posted)
         );
     }
-    if(!posts){
-        res.status(404)
-        return res.json({
-            error:"not found",
-            message :"post non trovato"
-        })
-    }
     res.json(filteredPost)
-};
+    };
 //show
 function show (req, res){
     const id = parseInt(req.params.id)
