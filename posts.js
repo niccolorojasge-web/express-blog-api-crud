@@ -1,13 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const posts = require('../data/posts');
+const postController = require ('./controller/postController')
 
 //rotte di crud
 
 //index
- router.get('/', function(req, res){
-    res.send('lista dei post');
- });
+ router.get('/',postController.index );
  //show
  router.get('/:id', function(req, req){
 res.send('dettagli deei post' + req.params.id);  
