@@ -55,7 +55,19 @@ function update(req, res) {
 };
 //modify
 function modify(req, res) {
-    res.send('modifica parziale post' + req.params.id);
+     const id=parseInt(req.params.id)
+    const post = posts.find(post=>post.id===id);
+    if(!post){
+        res.status(404)
+        return res.json({
+            message:"not found"
+        })
+    };
+    req.body.name ? post.name = req.body.name : post.name=post.name,
+    req.body.image ? post.image = req.body.image : post.image=post.image
+
+    console.log(posts)
+    res.json(post)
 };
 //delete
 function delet(req, res) {
