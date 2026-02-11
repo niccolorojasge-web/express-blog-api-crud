@@ -1,4 +1,5 @@
 const posts = require('../data/posts');
+const { post } = require('../routes/posts');
 //funzione index
 function index(req, res) {
     //inizialmente il menu filtrato corrisponde a quello originale
@@ -25,11 +26,32 @@ function show(req, res) {
 };
 //store
 function store(req, res) {
-    res.send('creazione nuovo post');
+    const newId=posts[posts.length -1].id+1;
+    const newPost ={
+        id : newId,
+        name:req.body.name,
+        Image:req.body.Image
+
+    }
+    posts.push(newPost)
+    console.log(posts)
+    res.status(201)
+    res.json(newPost)
 };
 //update
 function update(req, res) {
-    res.send('modifica integrale del post' + req.params.id);
+    const id=parseInt(req.params.id)
+    const post = posts.find(post=>post.id===id);
+    if(!post){
+        res.status(404)
+        return res.json({
+            message:"not found"
+        })
+    }
+    post.name= req.body.name,
+    post.image=req.body.image,
+    console.log(posts)
+    res.json(post)
 };
 //modify
 function modify(req, res) {
